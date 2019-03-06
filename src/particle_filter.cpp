@@ -18,13 +18,18 @@
 using namespace std;
 
 
+static default_random_engine gen;
+
+ParticleFilter::ParticleFilter(double (&standard_deviation)[3], double max_sensor_range): num_particles(25), is_initialized(false), std_pos(standard_deviation), gaussian_noise_x(0, std_pos[0]), gaussian_noise_y(0, std_pos[1]), gaussian_noise_theta(0, std_pos[2]), sensor_range(max_sensor_range){}
+
+
+ParticleFilter::~ParticleFilter(){}
+
+
 void ParticleFilter::init(double x, double y, double theta) {
     /**
-     * Set number of particles and initialize each particle to first position
-     * based on (noisy) GPS data
+     * Initialize each particle to first position based on (noisy) GPS data
      */
-    num_particles = 25;
-    
     for (int i = 0; i < num_particles; i++) {
         Particle p;
         p.id = i;

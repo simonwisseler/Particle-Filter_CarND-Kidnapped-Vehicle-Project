@@ -38,12 +38,13 @@ public:
      * @param arr Array of standard deviations (x, y, theta) required for generation of gaussian noise via normal distributions
      * @param s_range Sensor_range [m]
      */
-    ParticleFilter(double (&arr)[3], double s_range) : num_particles(0), is_initialized(false), gen(), std(arr), gaussian_noise_x(0, std[0]), gaussian_noise_y(0, std[1]), gaussian_noise_theta(0, std[2]), sensor_range(s_range){}
+    ParticleFilter(double (&arr)[3], double sensor_range);
     
-    ~ParticleFilter() {}
+    //Destructor
+    ~ParticleFilter();
     
     /**
-     * init Set number of particles and initialize each particle to first position based on (noisy) GPS data
+     * init Initialize each particle to first position based on (noisy) GPS data
      * @param x Initial x position [m]
      * @param y Initial y position [m]
      * @param theta Initial orientation [rad]
@@ -104,9 +105,9 @@ public:
      * This can be a very useful debugging tool to make sure transformations
      *   are correct and assocations correctly connected
      */
-    void SetAssociations(Particle& particle, const std::vector<int>& associations,
-                         const std::vector<double>& sense_x,
-                         const std::vector<double>& sense_y);
+    void SetAssociations(Particle& particle, const vector<int>& associations,
+                         const vector<double>& sense_x,
+                         const vector<double>& sense_y);
     
     /**
      * initialized Returns whether particle filter is initialized yet or not
@@ -132,18 +133,15 @@ private:
     bool is_initialized;
     
     // Vector of weights of all particles
-    std::vector<double> weights;
-    
-    // Generates random numbers as input for normal distributions
-    std::default_random_engine gen;
+    vector<double> weights;
     
     // Array of standard deviations (x, y, theta) required for generation of gaussian noise via normal distributions
-    double (&std)[3];
+    double (&std_pos)[3];
     
     // Normal distributions from which to sample noise for x, y, theta coordinate
-    std::normal_distribution<double> gaussian_noise_x;
-    std::normal_distribution<double> gaussian_noise_y;
-    std::normal_distribution<double> gaussian_noise_theta;
+    normal_distribution<double> gaussian_noise_x;
+    normal_distribution<double> gaussian_noise_y;
+    normal_distribution<double> gaussian_noise_theta;
     
     // Maximum sensor range
     double sensor_range;
