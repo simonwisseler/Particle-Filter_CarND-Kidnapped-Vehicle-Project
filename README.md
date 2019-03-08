@@ -1,5 +1,5 @@
 ---
-This repo contains a simple implementation of the Particle Filter algorithm for vehicle localization built on Udacity's Self-Driving Car Nanodegree Kidnapped-Vehicle-Project. 
+This repo contains a simple implementation of the Particle Filter algorithm for vehicle localization. It is built on Udacity's Self-Driving Car Nanodegree Kidnapped-Vehicle-Project. 
 
 The description below comes from the original repo (https://github.com/udacity/CarND-Kidnapped-Vehicle-Project).
 
